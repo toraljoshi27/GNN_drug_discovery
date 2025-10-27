@@ -1,0 +1,51 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\title{Midterm Report: GNNs for Molecular Property Prediction}
+\author{Rahman \and Samarth \and Toral Chauhan}
+\date{\today}
+\begin{document}
+\maketitle
+\section*{1.\ Objective \& Scope (Short)}
+We evaluate GCN/GIN/GAT on MoleculeNet datasets: Tox21 (multi-label toxicity), BBBP (binary blood-brain barrier penetration), and ESOL (regression of solubility). We use \textbf{scaffold-based splits} to assess generalization to unseen chemotypes.
+\section*{2.\ Data \& Splits}
+\begin{itemize}\setlength\itemsep{0.2em}
+\item \textbf{Datasets}: Tox21 (12 tasks), BBBP (binary), ESOL (regression).
+\item \textbf{Split}: scaffold; deterministic with fixed seed; no scaffold overlap across train/val/test.
+\end{itemize}
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Dataset & \#Mol & Split & Targets \\
+\midrule
+Tox21 & \textit{N\_tox21} & scaffold & 12 AUC tasks \\
+BBBP  & \textit{N\_bbbp}  & scaffold & ROC-AUC \\
+ESOL  & \textit{N\_esol}  & scaffold & RMSE/MAE \\
+\bottomrule
+\end{tabular}
+\end{center}
+\section*{3.\ Representation}
+Atom: type, degree, valence, aromaticity, charge, hybridization, ring. Bond: type, conjugation, ring, stereo.
+\section*{4.\ Methods}
+\textbf{Models}: GCN (baseline), GIN, GAT. \textbf{Training}: Adam, lr=$10^{-3}$, batch=128, early stopping, seed control. \textbf{Heads}: multi-label (Tox21), binary (BBBP), regression (ESOL).
+\section*{5.\ Results (Midterm Milestone)}
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Model & Tox21 (AUC$\uparrow$) & BBBP (AUC$\uparrow$) & ESOL (RMSE$\downarrow$) \\
+\midrule
+GCN  &  &  &  \\
+GIN  &  &  &  \\
+GAT  &  &  &  \\
+\bottomrule
+\end{tabular}
+\end{center}
+Optional: compare \emph{random} vs \emph{scaffold} split on a subset.
+\section*{6.\ Interpretability (Preview)}
+GNNExplainer/IG visualizations for 2--3 molecules per dataset; brief notes on highlighted substructures.
+\section*{7.\ Reproducibility \& Risks}
+Seeds \& versions logged; config-driven runs; check class imbalance (Tox21) and small data (ESOL). Commands to reproduce are in \texttt{README.md}.
+\end{document}

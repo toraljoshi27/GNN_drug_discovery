@@ -1,0 +1,28 @@
+# Tox21 — GCN baseline (multi-label)
+seed: 42
+experiment_name: tox21_gcn
+dataset:
+  name: tox21
+  split: scaffold
+  batch_size: 128
+  num_workers: 2
+model:
+  name: gcn
+  hidden_dim: 128
+  num_layers: 3
+  dropout: 0.2
+head:
+  task: multilabel
+  out_dim: 12
+train:
+  optimizer: adam
+  lr: 0.001
+  weight_decay: 1e-4
+  max_epochs: 50
+  early_stopping_patience: 8
+eval:
+  metrics: [roc_auc_macro, roc_auc_per_task]
+  eval_interval: 1
+logging:
+  out_dir: runs/tox21_gcn
+  save_best_metric: roc_auc_macro

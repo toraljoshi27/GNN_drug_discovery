@@ -1,0 +1,25 @@
+{\rtf1\ansi\deff0
+{\b Midterm Report: GNNs for Molecular Property Prediction}\line
+\line
+{\b 1. Objective & Scope}\line
+Evaluate GCN/GIN/GAT on Tox21 (multi-label), BBBP (binary), ESOL (regression) with scaffold splits.\line
+\line
+{\b 2. Data & Splits}\line
+Datasets, sample counts, scaffold split (deterministic, disjoint).\line
+\line
+{\b 3. Representation}\line
+Atom features: type, degree, valence, aromaticity, charge, hybridization, ring.\line
+Bond features: type, conjugation, ring, stereo.\line
+\line
+{\b 4. Methods}\line
+Models (GCN, GIN, GAT), training (Adam, lr=1e-3, batch=128, early stopping), heads per task.\line
+\line
+{\b 5. Results}\line
+Table with AUC (Tox21/BBBP) and RMSE/MAE (ESOL). Optional random vs scaffold comparison.\line
+\line
+{\b 6. Interpretability}\line
+GNNExplainer/IG snapshots for 2--3 molecules per dataset.\line
+\line
+{\b 7. Reproducibility & Risks}\line
+Seeds, versions, configs; risks: class imbalance, small data.\line
+}

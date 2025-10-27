@@ -1,0 +1,29 @@
+# BBBP — GAT (binary)
+seed: 42
+experiment_name: bbbp_gat
+dataset:
+  name: bbbp
+  split: scaffold
+  batch_size: 128
+  num_workers: 2
+model:
+  name: gat
+  hidden_dim: 128
+  heads: 4
+  num_layers: 3
+  dropout: 0.2
+head:
+  task: binary
+  out_dim: 1
+train:
+  optimizer: adam
+  lr: 0.001
+  weight_decay: 1e-4
+  max_epochs: 40
+  early_stopping_patience: 6
+eval:
+  metrics: [roc_auc_macro]
+  eval_interval: 1
+logging:
+  out_dir: runs/bbbp_gat
+  save_best_metric: roc_auc_macro
