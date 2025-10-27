@@ -1,0 +1,48 @@
+# ==========================================
+# TOX21 — GAT (Multilabel Classification)
+# ==========================================
+
+seed: 42
+experiment_name: tox21_gat
+
+dataset:
+  name: tox21
+  task: multilabel_classification
+  split: scaffold
+  batch_size: 32
+  num_workers: 2
+
+model:
+  name: gat
+  hidden_dim: 64
+  num_layers: 3
+  heads: 4
+  dropout: 0.30
+  readout: mean
+  batch_norm: true
+  activation: elu
+
+head:
+  task: multilabel_classification
+  out_dim: 12        # ⚠️ Tox21 has 12 prediction tasks; adjust if your dataset defines differently
+
+train:
+  optimizer: adam
+  scheduler: cosine
+  lr: 0.0005
+  weight_decay: 0.00001
+  max_epochs: 100
+  early_stopping_patience: 15
+  device: auto
+
+loss:
+  name: bce_with_logits
+
+eval:
+  metrics: [roc_auc_macro, f1_macro, pr_auc_macro]
+  eval_interval: 1
+
+logging:
+  # Automatically creates a specific directory for each experiment
+  out_dir: runs/tox21_gat
+  save_best_metric: roc_auc_macro

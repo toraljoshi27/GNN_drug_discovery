@@ -1,0 +1,47 @@
+# ==========================================
+# BBBP — GIN (Binary Classification)
+# ==========================================
+
+seed: 42
+experiment_name: bbbp_gin
+
+dataset:
+  name: bbbp
+  task: binary_classification
+  split: scaffold
+  batch_size: 64
+  num_workers: 2
+
+model:
+  name: gin
+  hidden_dim: 128
+  num_layers: 3
+  dropout: 0.30
+  readout: sum
+  batch_norm: true
+  activation: relu
+
+head:
+  task: binary_classification
+  out_dim: 1
+
+train:
+  optimizer: adam
+  scheduler: cosine
+  lr: 0.001
+  weight_decay: 0.00001
+  max_epochs: 100
+  early_stopping_patience: 15
+  device: auto
+
+loss:
+  name: bce_with_logits
+
+eval:
+  metrics: [roc_auc, accuracy, f1]
+  eval_interval: 1
+
+logging:
+  # Automatically creates a dedicated directory for this experiment
+  out_dir: runs/bbbp_gin
+  save_best_metric: roc_auc

@@ -1,0 +1,38 @@
+# ==========================================
+# ESOL — GCN (Regression)
+# ==========================================
+
+seed: 42
+experiment_name: esol_gcn
+
+dataset:
+  name: esol
+  split: scaffold
+  batch_size: 128
+  num_workers: 2
+
+model:
+  name: gcn
+  hidden_dim: 128
+  num_layers: 5
+  dropout: 0.2
+
+head:
+  task: regression
+  out_dim: 1
+
+train:
+  optimizer: adam
+  lr: 0.001
+  weight_decay: 0.0001
+  max_epochs: 80
+  early_stopping_patience: 10
+
+eval:
+  metrics: [rmse, mae]
+  eval_interval: 1
+
+logging:
+  # The output folder will be automatically created as runs/esol_gcn
+  out_dir: runs/esol_gcn
+  save_best_metric: rmse

@@ -1,0 +1,48 @@
+# ==========================================
+# ESOL — GAT (Regression)
+# ==========================================
+
+seed: 42
+experiment_name: esol_gat
+
+dataset:
+  name: esol
+  task: regression
+  split: scaffold
+  batch_size: 32
+  num_workers: 2
+
+model:
+  name: gat
+  hidden_dim: 64
+  num_layers: 3
+  heads: 4
+  dropout: 0.30
+  readout: mean
+  batch_norm: true
+  activation: elu
+
+head:
+  task: regression
+  out_dim: 1
+
+train:
+  optimizer: adam
+  scheduler: cosine
+  lr: 0.0005
+  weight_decay: 0.00001
+  max_epochs: 150
+  early_stopping_patience: 20
+  device: auto
+
+loss:
+  name: mse
+
+eval:
+  metrics: [rmse, mae]
+  eval_interval: 1
+
+logging:
+  # Automatically creates a specific directory for each experiment
+  out_dir: runs/esol_gat
+  save_best_metric: rmse

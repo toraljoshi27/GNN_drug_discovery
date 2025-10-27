@@ -1,0 +1,47 @@
+# ==========================================
+# TOX21 — GIN (Multilabel Classification)
+# ==========================================
+
+seed: 42
+experiment_name: tox21_gin
+
+dataset:
+  name: tox21
+  task: multilabel_classification
+  split: scaffold
+  batch_size: 64
+  num_workers: 2
+
+model:
+  name: gin
+  hidden_dim: 128
+  num_layers: 3
+  dropout: 0.30
+  readout: sum
+  batch_norm: true
+  activation: relu
+
+head:
+  task: multilabel_classification
+  out_dim: 12      # ⚠️ Tox21 has 12 prediction tasks; adjust if dataset differs
+
+train:
+  optimizer: adam
+  scheduler: cosine
+  lr: 0.001
+  weight_decay: 0.00001
+  max_epochs: 100
+  early_stopping_patience: 15
+  device: auto
+
+loss:
+  name: bce_with_logits
+
+eval:
+  metrics: [roc_auc_macro, f1_macro, pr_auc_macro]
+  eval_interval: 1
+
+logging:
+  # Automatically creates a dedicated folder for this experiment
+  out_dir: runs/tox21_gin
+  save_best_metric: roc_auc_macro
