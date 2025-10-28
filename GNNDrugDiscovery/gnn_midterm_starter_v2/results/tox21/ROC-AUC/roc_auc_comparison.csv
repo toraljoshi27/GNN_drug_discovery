@@ -1,0 +1,4 @@
+model,roc-auc,file
+GAT,0.7202890025418062,metrics_tox21_gat_test.csv
+GCN,0.6524098980449792,metrics_tox21_gcn_test.csv
+GIN,0.7201206677630713,metrics_tox21_gin_test.csv

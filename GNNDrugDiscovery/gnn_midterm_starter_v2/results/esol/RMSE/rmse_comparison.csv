@@ -1,0 +1,4 @@
+model,rmse,file
+GAT,1.066211819648743,metrics_esol_gat_test.csv
+GCN,1.601966381072998,metrics_esol_gcn_test.csv
+GIN,1.511722207069397,metrics_esol_gin_test.csv

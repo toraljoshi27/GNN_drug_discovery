@@ -1,0 +1,4 @@
+model,roc-auc,file
+GAT,0.5,metrics_bbbp_gat_test.csv
+GCN,0.5,metrics_bbbp_gcn_test.csv
+GIN,0.5,metrics_bbbp_gin_test.csv
