@@ -173,7 +173,6 @@ python scripts/visualize_molecule_importance.py \
   --split test \
   --n 16
 ```
-
 Expected outputs (examples):
 - **Tox21 molecule — GCN highlights reactive sites**: `results/tox21/figs/importance_tox21_gcn_top.png`
 - **ESOL molecule — GIN focuses on aromatic ring regions**: `results/esol/figs/importance_esol_gin_top.png`
@@ -205,42 +204,4 @@ chmod +x scripts/run_all_visuals.sh
 
 ---
 
-## 8) Reproducibility knobs (recommended in YAML)
 
-- **seed**: fix random seeds for PyTorch/NumPy.
-- **splitter**: scaffold vs random; report which you used.
-- **metrics**: ensure regression (RMSE/MAE/R2) vs classification (ROC‑AUC/PR‑AUC/ACC) are configured.
-- **output_root**: a central place like `results/<dataset>` so scripts can find CSVs.
-- **checkpoint_dir**: `runs/<dataset>_<model>`.
-
----
-
-## 9) Troubleshooting
-
-- **`ModuleNotFoundError: No module named 'src'`**  
-  Run from repo root and use module form: `python -m src.train ...` or `python -m scripts.evaluate_and_plot ...`. Also `pip install -e .` after cloning.
-
-- **Figures folder is empty**  
-  Usually evaluation didn’t run to completion or save paths weren’t created. Verify the script calls `mkdir(parents=True, exist_ok=True)` and check for exceptions earlier in the logs.
-
-- **AUC script says “No AUC-like column …”**  
-  You probably pointed it at ESOL (regression) or your column names differ from the defaults. Use BBBP/Tox21, or add your metric name to `AUC_CANDIDATES` in `compare_roc_auc.py`.
-
-- **RDKit install on Apple Silicon**  
-  Prefer `conda install -c conda-forge rdkit`. Avoid `pip install rdkit` on macOS.
-
----
-
-## 10) What’s next (final deliverables)
-
-- Finish **all 9 runs** and evaluations.
-- Add **interpretability**: saliency/attention maps with captions.
-- Add **extra datasets** (e.g., SIDER, ClinTox) for robustness.
-- Try **Graph Transformer / MPNN** baselines.
-- Provide a **reproducible pipeline** with checkpoints + analysis notebook.
-
----
-
-## 11) Citation
-
-If you use MoleculeNet or DeepChem loaders, please cite their respective papers/projects.
