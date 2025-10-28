@@ -1,4 +1,4 @@
-# GNN for Molecular Property Prediction — Midterm Starter
+# GNN for Molecular Property Prediction
 
 This repository trains **GCN/GIN/GAT** on **Tox21 (multi-label)**, **BBBP (binary)**, and **ESOL (regression)** with **scaffold splits**.
 
