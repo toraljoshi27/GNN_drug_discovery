@@ -1139,7 +1139,7 @@ def main():
         df_epochs.to_excel(writer, sheet_name="epochs", index=False)
         df_summary.to_excel(writer, sheet_name="summary", index=False)
 
-    print(f"[OK] Wrote detailed Excel results to {excel_path}")
+    print(f"Detailed Results for ESOL are exported to {excel_path}")
 
 
 if __name__ == "__main__":
